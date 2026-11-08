@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#020711"><link rel="manifest" href="./manifest.webmanifest">
+<title>OMNIA SYMPHONIA — AI Command Center</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="stars"></div><div class="nebula"></div>
+<header class="topbar">
+  <div class="eyebrow">THE SYMPHONY OF DIGITAL INTELLIGENCE</div>
+  <div class="status"><i></i><span>SYSTEM STATUS: <b>ONLINE</b><small>LOCAL DEMO • CONNECT A MODEL FOR LIVE AI</small></span></div>
+</header>
+<main class="layout">
+  <aside class="left-col">
+    <section class="panel entrance"><h2>01. COSMIC ENTRANCE</h2><div class="starfield">✦ · ˚ ✧ · ⋆ ✦ · ˚ ✧ · ⋆</div><p>WELCOME TO</p><h3>OMNIA SYMPHONIA</h3><p>Where Intelligence<br>Meets Imagination</p><div class="starfield">✧ ⋆ ✦ ✧ ⋆ ✦ ✧</div></section>
+    <section class="panel"><h2>02. NEURAL NETWORK HARMONY</h2><div class="network-wrap"><div class="node">MY NEURAL NETWORK<small>Modular AI interface</small></div><div class="network-orb">✧</div><div class="node">SYMPHONIC INTEGRATION<small>AI • ML • DL</small></div></div></section>
+    <section class="panel"><h2>03. TECHNOLOGY STACK</h2><div class="twocol"><div><h4>TECHNOLOGY</h4><p>◈ Python</p><p>◈ FastAPI</p><p>◈ HTML / CSS / JS</p><p>◈ OpenAI-compatible API</p></div><div><h4>CAPABILITIES</h4><p>◎ Language</p><p>◎ Data analysis</p><p>◎ Creative content</p><p>◎ Coding assistance</p></div></div></section>
+    <section class="panel aurora"><h2>04. DIGITAL AURORA</h2><div class="aurora-art"></div><p>▣ Runtime: <b id="runtime">Browser demo</b></p><p>▣ API connection: <b id="apiState">Not configured</b></p><p>▣ Security: <b>Local-first setup</b></p><p class="green">✦ DIGITAL AURORA READY</p></section>
+  </aside>
+  <section class="center-col">
+    <div class="hero-title"><div class="infinity">∞</div><h1>OMNIA <span>SYMPHONIA</span></h1><p>ONE VISION&nbsp; • &nbsp;MANY INTELLIGENCES&nbsp; • &nbsp;INFINITE POSSIBILITIES</p></div>
+    <div class="core-stage"><div class="ring ring-one"></div><div class="ring ring-two"></div><div class="core"><div class="core-grid"></div><span>Ω</span></div><div class="platform">OMNIA SYMPHONIA<small>AI • ML • DL • BEYOND</small></div></div>
+    <section class="panel capability"><h2>INTEGRATED AI ECOSYSTEM</h2><div class="cap-grid"><div>◉<small>Language<br>Intelligence</small></div><div>◎<small>Vision<br>Intelligence</small></div><div>▤<small>Data<br>Intelligence</small></div><div>⬡<small>Security<br>Intelligence</small></div><div>✧<small>Creative<br>Intelligence</small></div><div>⚙<small>Automation<br>Assistance</small></div></div></section>
+    <section class="panel infrastructure"><h2>GLOBAL INFRASTRUCTURE</h2><div class="map">✦ · · · · · · · · · ✦<br><span>AMERICA　 EUROPE　 ASIA　 AFRICA　 OCEANIA</span></div><p>Distributed-ready architecture • Monitoring • Scalable deployment</p></section>
+  </section>
+  <aside class="right-col">
+    <section class="panel"><h2>05. INTELLECTUAL GRAND FINALE</h2><h3 class="cyan">OMNIA SYMPHONIA</h3><p>CAPABILITY STATUS</p><div class="metric"><span>Natural language</span><b>Ready to connect</b></div><div class="metric"><span>Predictive analytics</span><b>Needs data/model</b></div><div class="metric"><span>Threat detection</span><b>Not enabled</b></div><div class="metric"><span>Software assistance</span><b>Chat prototype</b></div><div class="laurel">✺　STANDING OVATION　✺</div></section>
+    <section class="panel chat-panel"><h2>INTERACTIVE AI DEMONSTRATION</h2><div class="chat-head"><span class="avatar">Ω</span><div>Chat with Omnia Symphonia<small id="chatStatus">Demo mode • local responses</small></div><span class="online-dot"></span></div>
+    <div class="model-controls"><button type="button" id="localModelBtn" class="secondary">Load on-device AI model</button><span id="modelStatus">No model downloaded</span></div><div id="messages" class="messages"><div class="msg bot">Welcome to Omnia Symphonia. I’m your AI interface. Ask a question, request ideas, or ask for code. For real model responses, configure the backend using the README.</div><div class="msg user">What can you do?</div><div class="msg bot">I can demonstrate the interface, help plan projects, draft content, and assist with coding. In demo mode, responses are limited; connecting an AI provider enables live model replies.</div></div><form id="chatForm"><textarea id="userInput" rows="2" placeholder="Type your message..." required></textarea><button aria-label="Send message">➤</button></form><div class="chat-foot">Never paste passwords or secret API keys into this chat.</div></section>
+  </aside>
+</main>
+<footer><span>OMNIA SYMPHONIA</span> — INTELLIGENCE • HARMONY • A BRIGHTER TOMORROW <span class="footnote">Prototype v0.1 • Performance claims intentionally unverified</span></footer>
+<script src="./app.js"></script>
+<script>if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
+</body></html>

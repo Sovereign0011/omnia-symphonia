@@ -1,0 +1,12 @@
+{
+  "name": "Omnia Symphonia AI",
+  "short_name": "Omnia AI",
+  "description": "Cosmic AI dashboard with optional on-device language model.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#02040d",
+  "theme_color": "#020711",
+  "orientation": "portrait-primary",
+  "icons": []
+}
