@@ -17,6 +17,58 @@ function demoReply(text){
  if(/predict|data|analysis/.test(q)) return 'Analytics module status: awaiting a dataset and a configured analysis pipeline. No prediction or accuracy claim is being made by this demo.';
  return 'Signal received: "'+text+'". This is a local demo response, not a live model answer. Try loading the on-device AI model or configure the optional server backend.';
 }
+
+/* Harmony — guided assistant for using the dashboard. Client-side only:
+   a step-by-step tour plus plain answers to how-to questions. */
+const harmonySteps=[
+ {sel:'#sec-entrance',title:'Cosmic Entrance',text:'This is the front door — what Omnia Symphonia is, at a glance: one place where many kinds of intelligence work together.'},
+ {sel:'#sec-network',title:'Neural Network Harmony',text:'The network view. Each node is a different kind of intelligence — language, vision, data — wired together so they can share what they know.'},
+ {sel:'#sec-stack',title:'Technology Stack',text:"What's under the hood: Python and FastAPI on the server, plain HTML, CSS and JavaScript in your browser, and an OpenAI-compatible API for live model replies."},
+ {sel:'#sec-aurora',title:'Digital Aurora',text:"The live status strip. Runtime tells you whether you're in the browser demo or connected to the Python backend, and API connection shows whether a model is configured."},
+ {sel:'#sec-ecosystem',title:'Integrated AI Ecosystem',text:'The six intelligences at a glance: language, vision, data, security, creative, and automation. Each one is a lane you can build on.'},
+ {sel:'#sec-infrastructure',title:'Global Infrastructure',text:'Where it runs: a distributed-ready design across five continents, with monitoring and room to scale.'},
+ {sel:'#sec-capability',title:'Capability Status',text:"The honest scoreboard: what's ready to connect, what needs data or a model, and what's still just a prototype."},
+ {sel:'#sec-chat',title:'AI Demonstration',text:'The part you can touch. Type a question for a demo answer, load the on-device model for real replies in your browser, or connect the backend for a server model.'}
+];
+const tourOverlay=document.querySelector('#tourOverlay');
+const tourText=document.querySelector('#tourText');
+const tourStepLabel=document.querySelector('#tourStepLabel');
+const tourBackBtn=document.querySelector('#tourBack');
+const tourNextBtn=document.querySelector('#tourNext');
+let tourIndex=-1;
+function showTourStep(i){
+ document.querySelectorAll('.tour-highlight').forEach(el=>el.classList.remove('tour-highlight'));
+ const step=harmonySteps[i];
+ const target=document.querySelector(step.sel);
+ if(target){target.classList.add('tour-highlight');target.scrollIntoView({behavior:'smooth',block:'center'});}
+ tourText.textContent=step.text;
+ tourStepLabel.textContent='Step '+(i+1)+' of '+harmonySteps.length+' — '+step.title;
+ tourBackBtn.disabled=i===0;
+ tourNextBtn.textContent=i===harmonySteps.length-1?'Finish':'Next';
+}
+function startTour(){tourIndex=0;tourOverlay.hidden=false;showTourStep(0);}
+function endTour(){tourIndex=-1;tourOverlay.hidden=true;document.querySelectorAll('.tour-highlight').forEach(el=>el.classList.remove('tour-highlight'));}
+document.querySelector('#tourBtn').addEventListener('click',()=>{addMessage("Let's walk through it together — I'll highlight each section and explain it as we go.",'bot');startTour();});
+tourNextBtn.addEventListener('click',()=>{if(tourIndex>=harmonySteps.length-1){endTour();addMessage('That\'s the whole dashboard. Ask me anything about a section, or try the demo chat whenever you\'re ready.','bot');}else{tourIndex++;showTourStep(tourIndex);}});
+tourBackBtn.addEventListener('click',()=>{if(tourIndex>0){tourIndex--;showTourStep(tourIndex);}});
+document.querySelector('#tourClose').addEventListener('click',endTour);
+function harmonyGuide(text){
+ const q=text.toLowerCase();
+ if(/tour|walk ?through|show me around|\bguide\b/.test(q)) return '__TOUR__';
+ if(/what can (i|you) do|what does this (dashboard|site|page) do|how (do i|can i) use/.test(q)) return 'Here is the short version: read the panels left to right for the story, check Digital Aurora for live status, and use the chat below to try the AI demo. For the full walkthrough, tap "Take the tour" and I will guide you section by section.';
+ if(/how (does|do).*(demo|chat)|use the (chat|demo)|talk to (you|omnia)/.test(q)) return 'Type a question in the chat box and send it. In demo mode you get a local sample answer. For real replies, tap "Load on-device AI model" to run a small model in your browser, or connect the Python backend as the README describes.';
+ if(/what is (this|omnia|omnia symphonia)/.test(q)) return 'Omnia Symphonia is a prototype AI command center: one dashboard that brings language, vision, data, security, creative and automation intelligence together. This live page is the static demo — the Python backend is a separate step.';
+ return null;
+}
+document.querySelectorAll('.harmony-chips button').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+   const kind=btn.getAttribute('data-harmony');
+   if(kind==='tour'){addMessage("Let's walk through it together — I'll highlight each section and explain it as we go.",'bot');startTour();return;}
+   const q=kind==='what'?'What can I do here?':'How does the AI demo work?';
+   addMessage(q,'user');
+   addMessage(harmonyGuide(q),'bot');
+ });
+});
 async function loadLocalModel(){
  if(busy||localEngine)return;
  if(!('gpu' in navigator)){modelStatus.textContent='WebGPU unavailable in this browser. Try a recent Chrome version/device.';return}
@@ -41,7 +93,14 @@ async function loadLocalModel(){
 localModelBtn.addEventListener('click',loadLocalModel);
 form.addEventListener('submit',async e=>{
  e.preventDefault();const text=input.value.trim();if(!text||busy)return;
- addMessage(text,'user');input.value='';busy=true;sendButton.disabled=true;
+ addMessage(text,'user');input.value='';
+ const guide=harmonyGuide(text);
+ if(guide){
+   if(guide==='__TOUR__'){addMessage("Let's walk through it together — I'll highlight each section and explain it as we go.",'bot');startTour();}
+   else addMessage(guide,'bot');
+   input.focus();return;
+ }
+ busy=true;sendButton.disabled=true;
  const pending=addMessage('Processing signal…','bot');
  try{
    if(localEngine){

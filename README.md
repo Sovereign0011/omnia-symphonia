@@ -55,10 +55,13 @@ Restart the server after setting environment variables. The model name must be a
 - Add real datasets, evaluations, and validated pipelines for vision, analytics, or security features.
 - Do not expose this development server directly to the public internet.
 
+## Harmony — guided assistant
+Harmony is the dashboard's guide. **"Guided tour with Harmony"** (top bar, or the "Take the tour" chip in the chat panel) walks visitors through each section in order, highlighting it and explaining what it does. The chat also answers how-to questions about the dashboard ("What can I do here?", "How does the AI demo work?"). All client-side — no backend needed.
+
 ## Project files
 - `index.html` — dashboard structure
 - `styles.css` — visual theme and responsive styling
-- `app.js` — interactive chat and demo fallback
+- `app.js` — interactive chat, demo fallback, and Harmony guided tour
 - `server.py` — optional FastAPI backend
 - `requirements.txt` — Python dependencies
 

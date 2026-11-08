@@ -3,3 +3,20 @@
 .model-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0}
 .model-controls .secondary{font-size:10px;padding:8px 10px;background:linear-gradient(#422a83,#16163c);border-color:#b36cff}
 #modelStatus{font-size:10px;color:#a9cbe5;overflow-wrap:anywhere}
+
+/* Harmony — guided assistant */
+.tour-btn{font-size:11px;padding:8px 12px;letter-spacing:1px;background:linear-gradient(#422a83,#16163c);border-color:#b36cff}
+.harmony-avatar{background:linear-gradient(#b36cff,#422a83)}
+.harmony-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 8px}
+.harmony-chips button{font-size:10px;padding:7px 10px;background:#0a2438;border-color:#087cae}
+.tour-overlay{position:fixed;inset:0;z-index:50;display:grid;place-items:end center;padding:18px;pointer-events:none}
+.tour-overlay[hidden]{display:none}
+.tour-card{pointer-events:auto;max-width:420px;width:100%;background:linear-gradient(135deg,rgba(10,26,54,.97),rgba(6,14,31,.97));border:1px solid #b36cff;border-radius:12px;padding:14px;box-shadow:0 0 30px #7b35ff80}
+.tour-head{display:flex;gap:8px;align-items:center}
+.tour-head small{display:block;color:#83b8d6;font-size:9px}
+.tour-head #tourClose{margin-left:auto;font-size:12px;padding:4px 8px;background:none;border:none}
+.tour-card p{font-size:12px;color:#d4e9ff}
+.tour-nav{display:flex;justify-content:space-between;gap:8px}
+.tour-nav button{font-size:11px;padding:8px 14px}
+.tour-nav .secondary{font-size:11px;padding:8px 14px;background:linear-gradient(#422a83,#16163c);border-color:#b36cff}
+.tour-highlight{outline:2px solid var(--gold)!important;box-shadow:0 0 30px #ffd58a88,0 0 15px #006ab52a!important}
