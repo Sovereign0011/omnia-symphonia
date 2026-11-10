@@ -34,6 +34,11 @@
     <div id="messages" class="messages"><div class="msg bot">Hi, I'm Harmony — your guide to this dashboard. Ask me what anything does, or tap "Take the tour" and I'll walk you through it, section by section.</div><div class="msg user">What can you do?</div><div class="msg bot">I can demonstrate the interface, help plan projects, draft content, and assist with coding. In demo mode, responses are limited; connecting an AI provider enables live model replies.</div></div><form id="chatForm"><textarea id="userInput" rows="2" placeholder="Type your message..." required></textarea><button aria-label="Send message">➤</button></form><div class="chat-foot">Never paste passwords or secret API keys into this chat.</div></section>
   </aside>
 </main>
+  <section class="panel soveryn-os" id="sec-soveryn-os">
+    <h2>06. SOVERYN OS — REALTIME SYNC &amp; LIVE EXECUTION</h2>
+    <p>Live from the Soveryn OS Cloud Run app, embedded here. Telemetry arrives in the browser console; commands go out through the bridge.</p>
+    <iframe id="soveryn-os-frame" src="https://ais-dev-royh7uwvkfadindcbpqw7d-173957724399.us-west2.run.app/?embed=sovereign" style="width: 100%; height: 680px; border: 1px solid #1e293b; border-radius: 12px;" allow="clipboard-write"></iframe>
+  </section>
 <footer><span>OMNIA SYMPHONIA</span> — INTELLIGENCE • HARMONY • A BRIGHTER TOMORROW <span class="footnote">Prototype v0.1 • Performance claims intentionally unverified</span></footer>
 <div id="tourOverlay" class="tour-overlay" hidden>
   <div class="tour-card" role="dialog" aria-label="Guided tour with Harmony">
@@ -44,4 +49,24 @@
 </div>
 <script src="./app.js"></script>
 <script>if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
+  <script>
+  const frame = document.getElementById('soveryn-os-frame');
+  const SOVERYN_OS_ORIGIN = 'https://ais-dev-royh7uwvkfadindcbpqw7d-173957724399.us-west2.run.app';
+
+  // Listen for live CRDT sync & execution telemetry from Soveryn OS
+  window.addEventListener('message', (event) => {
+    if (event.origin !== SOVERYN_OS_ORIGIN) return;
+    if (event.data?.source === 'soveryn-os') {
+      console.log('[Sovereign Dashboard <- Soveryn OS]', event.data.type, event.data.payload);
+    }
+  });
+
+  // Push a command or state mutation from your Sovereign Dashboard into Soveryn OS
+  function dispatchSovereignCommand(action, payload = {}) {
+    frame.contentWindow?.postMessage(
+      { source: 'sovereign-dashboard', type: 'SOVEREIGN_DASHBOARD_CMD', action, payload },
+      SOVERYN_OS_ORIGIN
+    );
+  }
+  </script>
 </body></html>
