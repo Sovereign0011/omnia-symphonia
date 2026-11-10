@@ -36,8 +36,8 @@
 </main>
   <section class="panel soveryn-os" id="sec-soveryn-os">
     <h2>06. SOVERYN OS — REALTIME SYNC &amp; LIVE EXECUTION</h2>
-    <p>Live from the Soveryn OS Cloud Run app, embedded here. Telemetry arrives in the browser console; commands go out through the bridge.</p>
-    <iframe id="soveryn-os-frame" src="https://ais-dev-royh7uwvkfadindcbpqw7d-173957724399.us-west2.run.app/?embed=sovereign" style="width: 100%; height: 680px; border: 1px solid #1e293b; border-radius: 12px;" allow="clipboard-write"></iframe>
+    <p>The Soveryn OS app runs in its own tab — it opens from here. Live sync, execution studio, and cluster views live there.</p>
+    <a href="https://ais-dev-royh7uwvkfadindcbpqw7d-173957724399.us-west2.run.app/" target="_blank" rel="noopener" style="display:inline-block; padding:12px 22px; border:1px solid #38bdf8; border-radius:12px; color:#e0f2fe; text-decoration:none; font-weight:600;">&#8599; Open Soveryn OS</a>
   </section>
 <footer><span>OMNIA SYMPHONIA</span> — INTELLIGENCE • HARMONY • A BRIGHTER TOMORROW <span class="footnote">Prototype v0.1 • Performance claims intentionally unverified</span></footer>
 <div id="tourOverlay" class="tour-overlay" hidden>
@@ -49,24 +49,4 @@
 </div>
 <script src="./app.js"></script>
 <script>if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
-  <script>
-  const frame = document.getElementById('soveryn-os-frame');
-  const SOVERYN_OS_ORIGIN = 'https://ais-dev-royh7uwvkfadindcbpqw7d-173957724399.us-west2.run.app';
-
-  // Listen for live CRDT sync & execution telemetry from Soveryn OS
-  window.addEventListener('message', (event) => {
-    if (event.origin !== SOVERYN_OS_ORIGIN) return;
-    if (event.data?.source === 'soveryn-os') {
-      console.log('[Sovereign Dashboard <- Soveryn OS]', event.data.type, event.data.payload);
-    }
-  });
-
-  // Push a command or state mutation from your Sovereign Dashboard into Soveryn OS
-  function dispatchSovereignCommand(action, payload = {}) {
-    frame.contentWindow?.postMessage(
-      { source: 'sovereign-dashboard', type: 'SOVEREIGN_DASHBOARD_CMD', action, payload },
-      SOVERYN_OS_ORIGIN
-    );
-  }
-  </script>
 </body></html>
